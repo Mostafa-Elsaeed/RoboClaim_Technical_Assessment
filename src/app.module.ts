@@ -9,6 +9,7 @@ import { AuthModule } from "./auth/auth.module";
 import { UsersModule } from "./users/users.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { AppDataSource } from "./database/database.config";
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { AppDataSource } from "./database/database.config";
     }),
     AuthModule,
     UsersModule,
+    UploadModule,
   ],
 })
 export class AppModule {}
