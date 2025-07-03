@@ -5,19 +5,13 @@ import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { catchErrors } from './global-helpers/catch-errors';
 import { Transport } from '@nestjs/microservices';
+import { rabbitmqServerConfig } from './configs/rabbit-mq/rabbit-mq.config';
 
 async function startApp() {
   const app = await NestFactory.create(AppModule);
   const port = process.env.PORT || 3000;
 
-  app.connectMicroservice({
-    transport: Transport.RMQ,
-    options: {
-      urls: ['amqp://guest:guest@192.168.1.201:5672'],
-      queue: 'file_processing_queue',
-      queueOptions: { durable: false },
-    },
-  });
+  app.connectMicroservice(rabbitmqServerConfig);
 
   await app.startAllMicroservices();
   Logger.log('RabbitMQ Microservice is running');
