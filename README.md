@@ -76,6 +76,88 @@ The API documentation can be accessed at `/api/docs` when the application is run
 
 The application uses environment variables for configuration. Check the validation schema in `/configs/env/validation.schema.ts` for required variables.
 
+## ✅ Implemented Features
+
+### 🔐 Authentication
+
+- `POST /auth/signup` – Register new users
+- `POST /auth/login` – Login and receive a JWT token
+- JWT-based authentication guard protects all routes
+
+---
+
+### 📤 File Upload
+
+- `POST /upload` – Upload one or multiple files
+- Supported file types validated (PDF, Images)
+- File processing queued via **RabbitMQ**
+- Extracted file metadata is stored in the database
+- Files are tied to the authenticated user
+
+---
+
+### 🧵 Async Processing
+
+- RabbitMQ is used for asynchronous job queue handling
+- Upload tasks are processed in background workers
+
+---
+
+### 📁 File Access
+
+- `GET /files` – Fetch all uploaded files by the current user
+- `GET /files/:id` – Fetch details for a specific uploaded file
+
+---
+
+### 📦 Containerization
+
+- Dockerfile for building the service
+- `docker-compose.yml` for local orchestration of:
+  - App
+  - RabbitMQ
+  - Database (if included)
+
+---
+
+### 📚 API Documentation
+
+- Swagger/OpenAPI auto-generated documentation available at:
+
+## Missing Components to Implement
+
+The following features were not implemented due to time constraints, but are acknowledged as part of the requirements:
+
+### 📡 Data Streaming
+
+- ❌ Simulating data streaming to local mock HTTP endpoints
+- ❌ Logging processed events to file or stdout
+
+### ☁️ Deployment
+
+- ❌ Deployment configuration for a cloud/container service (e.g., AWS, GCP, etc.)
+- ❌ Infrastructure as code (Terraform, CDK, etc.)
+- ❌ Deployment instructions for CI/CD pipeline or cloud provider
+
+### 🛡️ Security Enhancements
+
+- ❌ Web Application Firewall (WAF) or Cloudflare Gateway integration
+- ❌ Rate limiting or IP allowlisting on API routes
+
+### 🔍 Observability
+
+- ❌ Logging strategy beyond basic logging
+- ❌ Monitoring or tracing setup (OpenTelemetry, Prometheus, etc.)
+
+### 🧪 Testing
+
+- ❌ Unit and E2E tests for authentication and upload features
+
 ## License
+
+## 🧑‍💻 Author
+
+Mostafa Elsaeed
+mostafaelsaeed.com
 
 [MIT](LICENSE)
