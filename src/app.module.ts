@@ -20,7 +20,7 @@ import { FileModule } from './file/file.module';
       load: [config],
       cache: true,
       // envFilePath: [".env"],
-      validationSchema: envValidationSchema,
+      validationSchema: envValidationSchema,  
       validationOptions: {
         allowUnknown: true,
         abortEarly: true,

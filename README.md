@@ -1,73 +1,81 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS Application
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+A robust backend application built with NestJS framework that provides authentication, user management, file upload capabilities, and RabbitMQ integration.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Features
 
-## Description
+- **Authentication**: Secure user authentication system
+- **User Management**: Complete user CRUD operations
+- **File Management**: Upload and manage files
+- **Message Queue**: RabbitMQ integration for asynchronous processing
+- **Configuration Management**: Environment-based configuration with validation
+- **Database Integration**: TypeORM for database operations
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Tech Stack
 
-## Installation
+- [NestJS](https://nestjs.com/) - A progressive Node.js framework
+- [TypeORM](https://typeorm.io/) - ORM for TypeScript and JavaScript
+- [RabbitMQ](https://www.rabbitmq.com/) - Message broker
+- [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
 
-```bash
-$ npm install
-```
+## Project Structure
 
-## Running the app
+- `/auth` - Authentication module
+- `/users` - User management module
+- `/upload` - File upload functionality
+- `/file` - File management module
+- `/rabbitmq` - RabbitMQ integration module
+- `/configs` - Application configuration
+- `/database` - Database configuration and connection
 
-```bash
-# development
-$ npm run start
+## Getting Started
 
-# watch mode
-$ npm run start:dev
+### Prerequisites
 
-# production mode
-$ npm run start:prod
-```
+- Node.js (v14 or later)
+- npm or yarn
+- RabbitMQ server
+- Database (based on your TypeORM configuration)
 
-## Test
+### Installation
 
-```bash
-# unit tests
-$ npm run test
+1. Clone the repository
 
-# e2e tests
-$ npm run test:e2e
+   ```bash
+   git clone <repository-url>
+   cd <repository-name>
+   ```
 
-# test coverage
-$ npm run test:cov
-```
+2. Install dependencies
 
-## Support
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+3. Environment Configuration
+   Create a `.env` file in the root directory with the necessary environment variables according to the validation schema.
 
-## Stay in touch
+4. Start the application
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+   ```bash
+   # development
+   npm run start:dev
+
+   # production mode
+   npm run build
+   npm run start:prod
+   ```
+
+## API Documentation
+
+The API documentation can be accessed at `/api/docs` when the application is running (if Swagger is configured).
+
+## Environment Variables
+
+The application uses environment variables for configuration. Check the validation schema in `/configs/env/validation.schema.ts` for required variables.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+[MIT](LICENSE)
