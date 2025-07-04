@@ -28,9 +28,9 @@ export class FileService {
       });
 
       await this.uploadedFileRepository.save(fileRecord);
-      console.log(`✅ File saved to DB: ${fileRecord.id}`);
+      console.log(`File saved to DB: ${fileRecord.id}`);
     } catch (err) {
-      console.error('❌ Error saving file to DB:', err);
+      console.error('Error saving file to DB:', err);
     }
 
     channel.ack(message);
