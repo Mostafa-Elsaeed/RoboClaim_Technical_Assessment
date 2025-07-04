@@ -4,6 +4,7 @@ import { randomUUID } from 'crypto';
 import { createWriteStream, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 import { rabbitmqConstants } from 'src/configs/rabbit-mq/rabbit-mq.config';
+import { FileData } from './file-data.type';
 
 @Injectable()
 export class UploadService {
@@ -24,7 +25,7 @@ export class UploadService {
       stream.write(file.buffer);
       stream.end();
 
-      const fileData = {
+      const fileData: FileData = {
         userId,
         originalName: file.originalname,
         storedName: filename,
