@@ -19,7 +19,7 @@ export class FileService {
 
     try {
       const fileRecord = this.uploadedFileRepository.create({
-        userId: fileData.userId,
+        user: { id: fileData.userId },
         originalName: fileData.originalName,
         storedName: fileData.storedName,
         path: fileData.path,
@@ -38,20 +38,26 @@ export class FileService {
 
   async getUserFiles(userId: string): Promise<UploadedFileEntity[]> {
     return this.uploadedFileRepository.find({
-      where: { userId },
+      where: { user: { id: userId } },
       order: { createdDate: 'DESC' },
     });
   }
 
-  async getFileById(id: string): Promise<UploadedFileEntity> {
+  async getFileById(id: string, userId: string): Promise<UploadedFileEntity> {
     const file = await this.uploadedFileRepository.findOne({
-      where: { id },
+      where: { id: id },
+      relations: { user: true },
     });
 
     if (!file) {
       throw new NotFoundException(`File with ID ${id} not found`);
     }
 
+    if (file.user.id != userId) {
+      throw new NotFoundException(
+        `File with ID ${id} not found for user ${userId}`,
+      );
+    }
     return file;
   }
 }

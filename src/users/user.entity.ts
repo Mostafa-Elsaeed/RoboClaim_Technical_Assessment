@@ -1,9 +1,10 @@
-import { BaseEntity } from "../database/base-entity";
-import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
+import { UploadedFileEntity } from '../file/uploaded-file.entity';
+import { BaseEntity } from '../database/base-entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
-@Entity("users")
+@Entity('users')
 export class UserEntity extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column({ length: 100 })
@@ -23,4 +24,7 @@ export class UserEntity extends BaseEntity {
 
   @Column({ nullable: true })
   profileImageUrl?: string;
+
+  @OneToMany(() => UploadedFileEntity, (file) => file.user)
+  files: UploadedFileEntity[];
 }

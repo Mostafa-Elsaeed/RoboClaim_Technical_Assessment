@@ -32,7 +32,7 @@ export class FileController {
 
   @Get(':id')
   @UseGuards(AuthGuard)
-  async getFileById(@Param('id') id: string) {
-    return this.fileService.getFileById(id);
+  async getFileById(@Param('id') id: string, @User('userId') userId) {
+    return this.fileService.getFileById(id, userId);
   }
 }

@@ -1,18 +1,21 @@
+import { UserEntity } from '../users/user.entity';
 import { BaseEntity } from '../database/base-entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  CreateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity('uploaded_files')
 export class UploadedFileEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  userId: string;
+  @ManyToOne(() => UserEntity, (user) => user.files)
+  @JoinColumn()
+  user: UserEntity;
 
   @Column()
   originalName: string;
