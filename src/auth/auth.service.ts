@@ -14,6 +14,9 @@ export class AuthService {
   async signIn(signInDto: SignInDto): Promise<{ access_token: string }> {
     const { email, password } = signInDto;
     const user = await this.usersService.findUser(email);
+    if (!user) {
+      throw new UnauthorizedException('Invalid email or password');
+    }
     const isPasswordValid = await this.usersService.comparePasswords(
       password,
       user.hashPassword,

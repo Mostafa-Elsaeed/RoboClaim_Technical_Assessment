@@ -3,19 +3,16 @@ import {
   RmqOptions,
   Transport,
 } from '@nestjs/microservices';
+import { rabbitmqConfig } from '../env/files/rabbitmq.env.config';
 
-export const rabbitmqConstants = {
-  queueName: process.env.RABBITMQ_QUEUE || 'file_processing_queue',
-  serviceName: 'RABBITMQ_SERVICE',
-  url: process.env.RABBITMQ_URL || 'amqp://guest:guest@192.168.1.201:5672',
-};
+const rabbitmqUrl = `amqp://${rabbitmqConfig().rabbitmq.username}:${rabbitmqConfig().rabbitmq.password}@${rabbitmqConfig().rabbitmq.host}`;
 
 export const rabbitmqClientConfig: ClientProviderOptions = {
-  name: rabbitmqConstants.serviceName,
+  name: rabbitmqConfig().rabbitmq.serviceName,
   transport: Transport.RMQ,
   options: {
-    urls: [rabbitmqConstants.url],
-    queue: rabbitmqConstants.queueName,
+    urls: [rabbitmqUrl],
+    queue: rabbitmqConfig().rabbitmq.queueName,
     queueOptions: {
       durable: false,
     },
@@ -25,8 +22,8 @@ export const rabbitmqClientConfig: ClientProviderOptions = {
 export const rabbitmqServerConfig: RmqOptions = {
   transport: Transport.RMQ,
   options: {
-    urls: [rabbitmqConstants.url],
-    queue: rabbitmqConstants.queueName,
+    urls: [rabbitmqUrl],
+    queue: rabbitmqConfig().rabbitmq.queueName,
     queueOptions: {
       durable: false,
     },

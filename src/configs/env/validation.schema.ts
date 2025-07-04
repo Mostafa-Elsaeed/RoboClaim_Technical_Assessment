@@ -17,4 +17,12 @@ export const envValidationSchema = Joi.object({
   // JWT (example)
   JWT_SECRET: Joi.string().required(),
   JWT_EXPIRATION: Joi.string().required(),
+
+  // RabbitMQ (example)
+  RABBITMQ_HOST: Joi.string().required(),
+  RABBITMQ_PORT: Joi.number().default(5672),
+  RABBITMQ_USERNAME: Joi.string().required(),
+  RABBITMQ_PASSWORD: Joi.string().required(),
+  RABBITMQ_QUEUE_NAME: Joi.string().default("file_uploads"),
+  
 });

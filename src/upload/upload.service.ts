@@ -3,13 +3,15 @@ import { ClientProxy } from '@nestjs/microservices';
 import { randomUUID } from 'crypto';
 import { createWriteStream, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
-import { rabbitmqConstants } from 'src/configs/rabbit-mq/rabbit-mq.config';
+
 import { FileData } from './file-data.type';
+import { rabbitmqConfig } from 'src/configs/env/files/rabbitmq.env.config';
 
 @Injectable()
 export class UploadService {
   constructor(
-    @Inject(rabbitmqConstants.serviceName) private rabbitmqClient: ClientProxy,
+    @Inject(rabbitmqConfig().rabbitmq.serviceName)
+    private rabbitmqClient: ClientProxy,
   ) {}
   async saveFilesLocally(files: Express.Multer.File[], userId: string) {
     const basePath = join(__dirname, '..', 'storage', userId);
@@ -37,7 +39,7 @@ export class UploadService {
       savedFiles.push(fileData);
 
       // Queue it
-      this.rabbitmqClient.emit(rabbitmqConstants.queueName, fileData);
+      this.rabbitmqClient.emit(rabbitmqConfig().rabbitmq.queueName, fileData);
     }
 
     return {
