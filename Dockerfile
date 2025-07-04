@@ -1,5 +1,3 @@
-# CMD ["node", "dist/main.js"]
-
 FROM node:18-alpine as builder
 
 WORKDIR /app
@@ -18,13 +16,15 @@ WORKDIR /app
 
 COPY package*.json ./
 
-# Include dev dependencies needed for migrations
+# Install ts-node and typescript for migrations
 RUN npm ci --legacy-peer-deps
 
+# Copy compiled JavaScript files
 COPY --from=builder /app/dist /app/dist
-# Copy migrations if they're not in the dist folder
-COPY --from=builder /app/src/database/migrations /app/src/database/migrations
-COPY --from=builder /app/src/database/database.config.ts /app/src/database/database.config.ts
+# Copy source files for migrations
+COPY --from=builder /app/src /app/src
+# Copy tsconfig files needed for ts-node
+COPY --from=builder /app/tsconfig*.json ./
 
 USER node
 
