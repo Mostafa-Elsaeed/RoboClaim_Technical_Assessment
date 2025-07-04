@@ -47,6 +47,7 @@ export class FileService {
     const file = await this.uploadedFileRepository.findOne({
       where: { id: id },
       relations: { user: true },
+      select: { user: { id: true } },
     });
 
     if (!file) {
